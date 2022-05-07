@@ -58,9 +58,9 @@ class LSTM(nn.Module):
         self.hidden_size = hidden_size
         self.seq_length = seq_length
         
-        # self.lstm = nn.LSTM(input_size=input_size, hidden_size=hidden_size,
-        #                     num_layers=num_layers, batch_first=True)
-        self.lstm = CustomLSTM(input_sz=input_size, hidden_sz=hidden_size, quaternion=True)
+        self.lstm = nn.LSTM(input_size=input_size, hidden_size=hidden_size,
+                            num_layers=num_layers, batch_first=True)
+        # self.lstm = CustomLSTM(input_sz=input_size, hidden_sz=hidden_size, quaternion=True)
         
         self.fc = nn.Linear(hidden_size, num_classes)
 

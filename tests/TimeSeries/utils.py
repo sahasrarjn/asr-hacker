@@ -90,6 +90,7 @@ class QLinear(nn.Module):
         kernels_4_k = torch.cat([self.k_weight,  -self.j_weight, self.i_weight, self.r_weight], dim=0)
         kernels_4_quaternion   = torch.cat([kernels_4_r, kernels_4_i, kernels_4_j, kernels_4_k], dim=1)
 
+
         if input.dim() == 2 :
 
             if self.bias is not None:
@@ -113,19 +114,19 @@ class CustomLSTM(nn.Module):
         if quaternion: linear_layer = QLinear
         else: linear_layer = nn.Linear
         
-        #i_t
+        # input gate
         self.W_i = linear_layer(input_sz, hidden_sz)
         self.U_i = linear_layer(hidden_sz, hidden_sz, bias=False)
         
-        #f_t
+        # forget gate
         self.W_f = linear_layer(input_sz, hidden_sz)
         self.U_f = linear_layer(hidden_sz, hidden_sz, bias=False)
         
-        #c_t
+        # candidate
         self.W_c = linear_layer(input_sz, hidden_sz)
         self.U_c = linear_layer(hidden_sz, hidden_sz, bias=False)
         
-        #o_t
+        # output gate
         self.W_o = linear_layer(input_sz, hidden_sz)
         self.U_o = linear_layer(hidden_sz, hidden_sz, bias=False)
         
